@@ -1,6 +1,3 @@
-<div>
-  <%= flash[:notice] %>
-</div>
 
 
 <% if @book.errors.any? %>
@@ -25,9 +22,15 @@
           <th>name</th><th><%= @user.name %></th>
       </tr>
   <tr>
-	  <th>introduction</th>
+	  <th>introduction</th><th><%= @user.introduction %></th>
   </tr>
 </tbody></table>
+
+<div class="row">
+  <%= link_to  edit_user_path(@user.id),class:"btn btn-outline-secondary" do %>
+  <i class="fas fa-user-cog"></i>
+  <% end %>
+</div>
 
 <h1>New book</h1>
 <%= form_with model: Book.new do |f| %>
@@ -63,7 +66,9 @@
     <thead>
       <tbody>
         <tr>
-          <td><%= image_tag book.user.get_profile_image(100,100) %></td>
+          <td><%= link_to user_path(book.user.id) do %>
+          <%= image_tag book.user.get_profile_image(100,100) %>
+          <% end %></td>
           <td><%= link_to book.title, "/books/#{book.id}" %></td>
           <td><%= book.body %></td>
         </tr>
